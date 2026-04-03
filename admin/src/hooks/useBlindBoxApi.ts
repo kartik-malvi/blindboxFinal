@@ -1,6 +1,10 @@
 import { useState, useCallback } from 'react';
 
-const API_BASE = '/api/admin';
+// In production (Vercel), VITE_API_URL points to the Railway backend.
+// In development, requests go to the local dev server via Vite proxy.
+const API_BASE = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL}/api/admin`
+  : '/api/admin';
 
 function getHeaders(): Record<string, string> {
   return {
