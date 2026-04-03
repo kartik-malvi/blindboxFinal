@@ -1,0 +1,6 @@
+<div class="bb-item-card">
+  {{#if imageUrl}}
+    <img class="bb-item-card__img" src="{{imageUrl}}" alt="{{name}}" />
+  {{/if}}
+  <span class="bb-item-card__name">{{name}}</span>
+</div>

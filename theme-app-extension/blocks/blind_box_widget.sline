@@ -1,0 +1,43 @@
+<div
+  id="shopline-blind-box-widget"
+  data-product-id="{{product.id}}"
+  data-api-base="{{block.settings.api_base_url}}"
+  style="
+    --bb-primary: {{block.settings.primary_color}};
+    --bb-radius:  {{block.settings.border_radius}}px;
+  "
+></div>
+
+{{#asset 'blindbox.js' type='script' defer=true /}}
+{{#asset 'blindbox.css' type='stylesheet' /}}
+
+{{#schema}}
+{
+  "name": "Blind Box Widget",
+  "target": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "api_base_url",
+      "label": "Blind Box App URL",
+      "default": "https://yourapp.com",
+      "info": "Your deployed Blind Box backend URL (e.g. https://blindbox.yourapp.com)"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Button Color",
+      "default": "#7C3AED"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner Radius (px)",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "default": 12
+    }
+  ]
+}
+{{/schema}}

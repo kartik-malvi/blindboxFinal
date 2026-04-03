@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+storefront-src/node_modules/
+admin/node_modules/
+
+# Build output
+dist/
+public/admin/
+theme-app-extension/public/blindbox.min.js
+
+# Environment
+.env
+
+# Logs
+*.log

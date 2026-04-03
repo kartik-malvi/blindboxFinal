@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model BlindBox {
+  id                String          @id @default(uuid())
+  name              String
+  description       String?
+  price             Decimal
+  shoplineProductId String          @unique
+  isActive          Boolean         @default(true)
+  items             BlindBoxItem[]
+  orders            BlindBoxOrder[]
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+}
+
+model BlindBoxItem {
+  id         String          @id @default(uuid())
+  blindBoxId String
+  blindBox   BlindBox        @relation(fields: [blindBoxId], references: [id])
+  name       String
+  sku        String          @unique
+  imageUrl   String?
+  stock      Int             @default(0)
+  probability Float
+  isActive   Boolean         @default(true)
+  orders     BlindBoxOrder[]
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+}
+
+model BlindBoxOrder {
+  id                 String       @id @default(uuid())
+  shoplineOrderId    String       @unique
+  shoplineCustomerId String
+  blindBoxId         String
+  blindBox           BlindBox     @relation(fields: [blindBoxId], references: [id])
+  assignedItemId     String
+  assignedItem       BlindBoxItem @relation(fields: [assignedItemId], references: [id])
+  quantity           Int
+  status             OrderStatus  @default(PENDING)
+  revealedAt         DateTime?
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+}
+
+enum OrderStatus {
+  PENDING
+  ASSIGNED
+  FULFILLED
+  FAILED
+}
+
+model ShoplineStore {
+  id          String   @id @default(uuid())
+  shopDomain  String   @unique
+  accessToken String
+  installedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

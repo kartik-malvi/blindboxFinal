@@ -1,0 +1,17 @@
+{{#asset 'blindbox.js' type='script' defer=true /}}
+{{#asset 'blindbox.css' type='stylesheet' /}}
+
+{{#schema}}
+{
+  "name": "Blind Box Auto-Embed",
+  "target": "body",
+  "settings": [
+    {
+      "type": "text",
+      "id": "api_base_url",
+      "label": "Blind Box App URL",
+      "default": "https://yourapp.com"
+    }
+  ]
+}
+{{/schema}}

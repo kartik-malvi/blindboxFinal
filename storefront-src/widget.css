@@ -1,0 +1,318 @@
+/* ── Blind Box Widget Styles ──────────────────────────────────────────────
+   All styles scoped to #shopline-blind-box-widget or .bb- prefix.
+   No global resets, no * { } rules, no html/body overrides.
+   Theming via CSS custom properties set by merchant in block settings.
+   ──────────────────────────────────────────────────────────────────────── */
+
+#shopline-blind-box-widget {
+  --bb-primary: #7c3aed;
+  --bb-radius: 12px;
+  --bb-font: inherit;
+  font-family: var(--bb-font);
+  box-sizing: border-box;
+}
+
+#shopline-blind-box-widget *,
+#shopline-blind-box-widget *::before,
+#shopline-blind-box-widget *::after {
+  box-sizing: inherit;
+}
+
+/* ── Widget container ────────────────────────────────────────────────── */
+
+.bb-widget {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--bb-radius);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bb-widget__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.bb-widget__icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.bb-widget__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.bb-widget__subtitle {
+  margin: 0 0 16px 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* ── Teaser item cards ───────────────────────────────────────────────── */
+
+.bb-widget__teaser {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.bb-item-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 80px;
+}
+
+.bb-item-card__img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: calc(var(--bb-radius) / 2);
+  border: 1px solid #e5e7eb;
+}
+
+.bb-item-card__placeholder {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background: #f3f4f6;
+  border-radius: calc(var(--bb-radius) / 2);
+}
+
+.bb-item-card__name {
+  font-size: 0.75rem;
+  color: #374151;
+  text-align: center;
+  word-break: break-word;
+}
+
+.bb-no-items {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* ── Add to cart button ──────────────────────────────────────────────── */
+
+.bb-add-to-cart-btn {
+  display: block;
+  width: 100%;
+  padding: 14px 24px;
+  background-color: var(--bb-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--bb-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+  font-family: var(--bb-font);
+}
+
+.bb-add-to-cart-btn:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.bb-add-to-cart-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.bb-add-to-cart-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Spinner overlay ─────────────────────────────────────────────────── */
+
+.bb-spinner-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  border-radius: var(--bb-radius);
+}
+
+.bb-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e5e7eb;
+  border-top-color: var(--bb-primary);
+  border-radius: 50%;
+  animation: bb-widget-spin 0.8s linear infinite;
+}
+
+@keyframes bb-widget-spin {
+  to { transform: rotate(360deg); }
+}
+
+.bb-spinner-text {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* ── Status message ──────────────────────────────────────────────────── */
+
+.bb-status-message {
+  font-size: 0.875rem;
+  color: #374151;
+  text-align: center;
+  padding: 12px;
+  margin: 0;
+}
+
+/* ── Reveal stage ────────────────────────────────────────────────────── */
+
+.bb-reveal-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+}
+
+.bb-mystery-box {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  perspective: 400px;
+}
+
+.bb-box-body {
+  width: 100px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--bb-primary), #a855f7);
+  border-radius: 8px;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bb-box-question {
+  font-size: 2.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 800;
+  animation: bb-widget-spin 1.5s ease-in-out infinite;
+}
+
+.bb-box-lid {
+  width: 108px;
+  height: 28px;
+  background: var(--bb-primary);
+  filter: brightness(1.2);
+  border-radius: 6px;
+  position: absolute;
+  top: -8px;
+  left: -4px;
+  transform-origin: top center;
+}
+
+.bb-reveal-hint {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* ── Reveal result ───────────────────────────────────────────────────── */
+
+.bb-reveal-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  text-align: center;
+}
+
+.bb-reveal-heading {
+  margin: 0;
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.bb-reveal-item-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: var(--bb-radius);
+  border: 1px solid #e5e7eb;
+  min-width: 160px;
+}
+
+.bb-reveal-item-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: calc(var(--bb-radius) / 2);
+}
+
+.bb-reveal-item-placeholder {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.bb-reveal-item-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.bb-reveal-item-sku {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+/* ── Share button ────────────────────────────────────────────────────── */
+
+.bb-share-btn {
+  padding: 10px 24px;
+  background: transparent;
+  border: 2px solid var(--bb-primary);
+  color: var(--bb-primary);
+  border-radius: var(--bb-radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-family: var(--bb-font);
+}
+
+.bb-share-btn:hover {
+  background: var(--bb-primary);
+  color: #ffffff;
+}
+
+/* ── Accessibility: reduced motion ───────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .bb-spinner,
+  .bb-box-question,
+  .bb-box-lid,
+  .bb-add-to-cart-btn,
+  .bb-share-btn {
+    animation: none !important;
+    transition: none !important;
+  }
+}
